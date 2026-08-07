@@ -1,0 +1,20 @@
+{
+  "dashboard/competencias.qmd": {
+    "competencias.html": "fcecb9b3"
+  },
+  "dashboard/explorador.qmd": {
+    "explorador.html": "79eb5a30"
+  },
+  "dashboard/resumen.qmd": {
+    "resumen.html": "7f9afb2c"
+  },
+  "dashboard/salarios.qmd": {
+    "salarios.html": "2a816edf"
+  },
+  "index.qmd": {
+    "index.html": "a017a13e"
+  },
+  "dashboard/resumen.knit.md": {
+    "resumen.knit.html": "b567f02e"
+  }
+}

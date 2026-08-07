@@ -1,4 +1,0 @@
----
-title: "explorador"
-format: html
----

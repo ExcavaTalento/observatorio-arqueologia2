@@ -1,0 +1,510 @@
+---
+
+title: "Explorador del Mercado Laboral"
+format:
+html:
+toc: false
+code-fold: false
+----------------
+
+```{r}
+# ============================================================
+# EXCAVATALENTO
+# OBSERVATORIO DEL MERCADO LABORAL DE LA ARQUEOLOGÍA
+# EXPLORADOR INTERACTIVO
+# ============================================================
+
+
+# ============================================================
+# 1. PAQUETES
+# ============================================================
+
+source("../R/00_paquetes.R")
+
+library(readr)
+library(dplyr)
+library(plotly)
+library(crosstalk)
+library(htmltools)
+
+
+# ============================================================
+# 2. CARGA DE DATOS
+# ============================================================
+
+datos <- read_csv(
+  "../data/processed/encuesta_dashboard.csv",
+  show_col_types = FALSE
+)
+
+datos <- datos |>
+  mutate(
+    id_respuesta = row_number()
+  )
+
+
+# ============================================================
+# 3. DATOS COMPARTIDOS
+# ============================================================
+# SharedData permite que los filtros interactivos
+# trabajen sobre las mismas 185 respuestas.
+
+shared_datos <- SharedData$new(
+  datos,
+  key = ~id_respuesta,
+  group = "observatorio"
+)
+
+
+# ============================================================
+# 4. PALETA CORPORATIVA
+# ============================================================
+
+azul <- "#1E2294"
+azul_oscuro <- "#171C73"
+azul_claro <- "#4E58C8"
+texto <- "#222222"
+gris <- "#666666"
+fondo <- "#F2ECE2"
+blanco <- "#FFFFFF"
+
+
+# ============================================================
+# 5. CONFIGURACIÓN GENERAL DE LOS GRÁFICOS
+# ============================================================
+
+layout_base <- list(
+  paper_bgcolor = "rgba(0,0,0,0)",
+  plot_bgcolor = "rgba(0,0,0,0)",
+  font = list(
+    family = "Montserrat, Inter, Segoe UI, Arial, sans-serif",
+    color = texto
+  ),
+  margin = list(
+    l = 20,
+    r = 20,
+    t = 20,
+    b = 80
+  )
+)
+
+
+# ============================================================
+# 6. TÍTULO DEL DASHBOARD
+# ============================================================
+
+cat("
+<div class='dashboard-header'>
+  <h1>Explorador del Mercado Laboral</h1>
+  <p>
+    Observatorio de la Arqueología de Colombia · ExcavaTalento
+  </p>
+</div>
+")
+
+
+# ============================================================
+# 7. FILTROS
+# ============================================================
+
+filtro_departamento <- filter_select(
+  id = "filtro_departamento",
+  label = "Departamento",
+  sharedData = shared_datos,
+  group = ~departamento,
+  multiple = TRUE
+)
+
+filtro_experiencia <- filter_select(
+  id = "filtro_experiencia",
+  label = "Experiencia",
+  sharedData = shared_datos,
+  group = ~experiencia,
+  multiple = TRUE
+)
+
+filtro_formacion <- filter_select(
+  id = "filtro_formacion",
+  label = "Formación",
+  sharedData = shared_datos,
+  group = ~formacion,
+  multiple = TRUE
+)
+
+filtro_ingreso <- filter_select(
+  id = "filtro_ingreso",
+  label = "Ingreso",
+  sharedData = shared_datos,
+  group = ~ingreso,
+  multiple = TRUE
+)
+
+filtro_area <- filter_select(
+  id = "filtro_area",
+  label = "Área de trabajo",
+  sharedData = shared_datos,
+  group = ~area_trabajo,
+  multiple = TRUE
+)
+
+filtro_activo <- filter_select(
+  id = "filtro_activo",
+  label = "Situación laboral",
+  sharedData = shared_datos,
+  group = ~activo,
+  multiple = TRUE
+)
+
+
+# ============================================================
+# 8. CONTENEDOR DE FILTROS
+# ============================================================
+
+div(
+  class = "dashboard-filters",
+
+  div(
+    class = "dashboard-filter",
+    tags$strong("Departamento"),
+    filtro_departamento
+  ),
+
+  div(
+    class = "dashboard-filter",
+    tags$strong("Experiencia"),
+    filtro_experiencia
+  ),
+
+  div(
+    class = "dashboard-filter",
+    tags$strong("Formación"),
+    filtro_formacion
+  ),
+
+  div(
+    class = "dashboard-filter",
+    tags$strong("Ingresos"),
+    filtro_ingreso
+  ),
+
+  div(
+    class = "dashboard-filter",
+    tags$strong("Área de trabajo"),
+    filtro_area
+  ),
+
+  div(
+    class = "dashboard-filter",
+    tags$strong("Situación laboral"),
+    filtro_activo
+  )
+)
+
+
+# ============================================================
+# 9. INDICADORES PRINCIPALES
+# ============================================================
+
+cat("
+<div class='kpi-grid'>
+
+  <div class='kpi-card'>
+    <h3>PARTICIPANTES</h3>
+    <h1>185</h1>
+    <p>Respuestas de la encuesta</p>
+  </div>
+
+  <div class='kpi-card'>
+    <h3>TERRITORIOS</h3>
+    <h1>24</h1>
+    <p>Departamentos representados</p>
+  </div>
+
+  <div class='kpi-card'>
+    <h3>VARIABLES</h3>
+    <h1>24</h1>
+    <p>Dimensiones analizadas</p>
+  </div>
+
+  <div class='kpi-card'>
+    <h3>AÑO</h3>
+    <h1>2026</h1>
+    <p>Edición del observatorio</p>
+  </div>
+
+</div>
+")
+
+
+# ============================================================
+# 10. SITUACIÓN LABORAL
+# ============================================================
+
+cat("
+<div class='dashboard-section'>
+<h2>Situación laboral</h2>
+</div>
+")
+
+plot_ly(
+  data = datos,
+  x = ~activo,
+  type = "bar",
+  source = "activo",
+  marker = list(
+    color = azul
+  )
+) |>
+  layout(
+    layout_base,
+    xaxis = list(
+      title = "",
+      tickangle = -25
+    ),
+    yaxis = list(
+      title = "Participantes"
+    )
+  )
+
+
+# ============================================================
+# 11. EXPERIENCIA
+# ============================================================
+
+cat("
+<div class='dashboard-section'>
+<h2>Experiencia profesional</h2>
+</div>
+")
+
+plot_ly(
+  data = datos,
+  x = ~experiencia,
+  type = "histogram",
+  histfunc = "count",
+  source = "experiencia",
+  marker = list(
+    color = azul
+  )
+) |>
+  layout(
+    layout_base,
+    xaxis = list(
+      title = "",
+      tickangle = -25
+    ),
+    yaxis = list(
+      title = "Participantes"
+    )
+  )
+
+
+# ============================================================
+# 12. FORMACIÓN
+# ============================================================
+
+cat("
+<div class='dashboard-section'>
+<h2>Formación</h2>
+</div>
+")
+
+plot_ly(
+  data = datos,
+  x = ~formacion,
+  type = "histogram",
+  histfunc = "count",
+  source = "formacion",
+  marker = list(
+    color = azul_claro
+  )
+) |>
+  layout(
+    layout_base,
+    xaxis = list(
+      title = "",
+      tickangle = -25
+    ),
+    yaxis = list(
+      title = "Participantes"
+    )
+  )
+
+
+# ============================================================
+# 13. INGRESOS
+# ============================================================
+
+cat("
+<div class='dashboard-section'>
+<h2>Ingresos</h2>
+</div>
+")
+
+plot_ly(
+  data = datos,
+  x = ~ingreso,
+  type = "histogram",
+  histfunc = "count",
+  source = "ingreso",
+  marker = list(
+    color = azul
+  )
+) |>
+  layout(
+    layout_base,
+    xaxis = list(
+      title = "",
+      tickangle = -30
+    ),
+    yaxis = list(
+      title = "Participantes"
+    )
+  )
+
+
+# ============================================================
+# 14. ÁREA DE TRABAJO
+# ============================================================
+
+cat("
+<div class='dashboard-section'>
+<h2>Área de trabajo</h2>
+</div>
+")
+
+plot_ly(
+  data = datos,
+  x = ~area_trabajo,
+  type = "histogram",
+  histfunc = "count",
+  source = "area_trabajo",
+  marker = list(
+    color = azul_claro
+  )
+) |>
+  layout(
+    layout_base,
+    xaxis = list(
+      title = "",
+      tickangle = -40
+    ),
+    yaxis = list(
+      title = "Participantes"
+    )
+  )
+
+
+# ============================================================
+# 15. ESTABILIDAD LABORAL
+# ============================================================
+
+cat("
+<div class='dashboard-section'>
+<h2>Estabilidad laboral</h2>
+</div>
+")
+
+plot_ly(
+  data = datos,
+  x = ~estabilidad,
+  type = "histogram",
+  histfunc = "count",
+  source = "estabilidad",
+  marker = list(
+    color = azul
+  )
+) |>
+  layout(
+    layout_base,
+    xaxis = list(
+      title = "",
+      tickangle = -35
+    ),
+    yaxis = list(
+      title = "Participantes"
+    )
+  )
+
+
+# ============================================================
+# 16. TIPO DE EMPRESA
+# ============================================================
+
+cat("
+<div class='dashboard-section'>
+<h2>Tipo de empresa</h2>
+</div>
+")
+
+plot_ly(
+  data = datos,
+  x = ~tipo_empresa,
+  type = "histogram",
+  histfunc = "count",
+  source = "tipo_empresa",
+  marker = list(
+    color = azul_claro
+  )
+) |>
+  layout(
+    layout_base,
+    xaxis = list(
+      title = "",
+      tickangle = -35
+    ),
+    yaxis = list(
+      title = "Participantes"
+    )
+  )
+
+
+# ============================================================
+# 17. DEPARTAMENTO
+# ============================================================
+
+cat("
+<div class='dashboard-section'>
+<h2>Distribución territorial</h2>
+</div>
+")
+
+plot_ly(
+  data = datos,
+  x = ~departamento,
+  type = "histogram",
+  histfunc = "count",
+  source = "departamento",
+  marker = list(
+    color = azul
+  )
+) |>
+  layout(
+    layout_base,
+    xaxis = list(
+      title = "",
+      tickangle = -45
+    ),
+    yaxis = list(
+      title = "Participantes"
+    )
+  )
+
+
+# ============================================================
+# 18. PIE DE PÁGINA
+# ============================================================
+
+cat("
+<div class='dashboard-footer'>
+  <p>
+    ExcavaTalento · Observatorio del Mercado Laboral de la Arqueología
+  </p>
+  <p>
+    Fuente: Encuesta ExcavaTalento · 185 participantes · 2026
+  </p>
+</div>
+")
+```
+
+  
