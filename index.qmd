@@ -28,6 +28,8 @@ n_departamentos <- frecuencia_departamentos %>%
 n_preguntas <- ncol(encuesta) - 2
 
 fecha_hoy <- format(Sys.Date(), "%B %Y")
+
+#prueba
 ```
 
 ::: {.hero}
