@@ -1,0 +1,107 @@
+[
+  {
+    "objectID": "index.html#primera-encuesta-nacional-2026",
+    "href": "index.html#primera-encuesta-nacional-2026",
+    "title": "Observatorio del Mercado Laboral de la Arqueología Colombiana",
+    "section": "Primera Encuesta Nacional 2026",
+    "text": "Primera Encuesta Nacional 2026\nInformación basada en datos para comprender la realidad laboral de la arqueología en Colombia.\n\n185 participantes • 28 departamentos representados\n\nExplorar Dashboard →\n:::"
+  },
+  {
+    "objectID": "dashboard/resumen.html",
+    "href": "dashboard/resumen.html",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "185\n\n\n\n24\n\n\n\nPregrado\n\n\n\n&lt; 2 millones\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  genero,\n  labels = ~genero,\n  values = ~n,\n  type = \"pie\",\n  hole = 0.55\n)\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  edad,\n  x = ~edad,\n  y = ~n,\n  type = \"bar\"\n)\n\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  formacion,\n  x = ~formacion,\n  y = ~n,\n  type = \"bar\"\n)\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  experiencia,\n  x = ~experiencia,\n  y = ~n,\n  type = \"bar\"\n)\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  ingreso,\n  x = ~ingreso,\n  y = ~n,\n  type = \"bar\"\n)\n\nWarning: Ignoring 1 observations\n\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  activo,\n  labels = ~activo,\n  values = ~n,\n  type = \"pie\",\n  hole = 0.6\n)"
+  },
+  {
+    "objectID": "dashboard/resumen.html#indicadores-principales",
+    "href": "dashboard/resumen.html#indicadores-principales",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "185\n\n\n\n24\n\n\n\nPregrado\n\n\n\n&lt; 2 millones"
+  },
+  {
+    "objectID": "dashboard/resumen.html#perfil-de-los-participantes",
+    "href": "dashboard/resumen.html#perfil-de-los-participantes",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  genero,\n  labels = ~genero,\n  values = ~n,\n  type = \"pie\",\n  hole = 0.55\n)\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  edad,\n  x = ~edad,\n  y = ~n,\n  type = \"bar\"\n)"
+  },
+  {
+    "objectID": "dashboard/resumen.html#formación",
+    "href": "dashboard/resumen.html#formación",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  formacion,\n  x = ~formacion,\n  y = ~n,\n  type = \"bar\"\n)"
+  },
+  {
+    "objectID": "dashboard/resumen.html#experiencia",
+    "href": "dashboard/resumen.html#experiencia",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  experiencia,\n  x = ~experiencia,\n  y = ~n,\n  type = \"bar\"\n)"
+  },
+  {
+    "objectID": "dashboard/resumen.html#ingresos",
+    "href": "dashboard/resumen.html#ingresos",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  ingreso,\n  x = ~ingreso,\n  y = ~n,\n  type = \"bar\"\n)\n\nWarning: Ignoring 1 observations"
+  },
+  {
+    "objectID": "dashboard/resumen.html#trabaja-actualmente",
+    "href": "dashboard/resumen.html#trabaja-actualmente",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  activo,\n  labels = ~activo,\n  values = ~n,\n  type = \"pie\",\n  hole = 0.6\n)"
+  },
+  {
+    "objectID": "dashboard/resumen.knit.html",
+    "href": "dashboard/resumen.knit.html",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "185\n\n\n\n24\n\n\n\nPregrado\n\n\n\n&lt; 2 millones\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  genero,\n  labels = ~genero,\n  values = ~n,\n  type = \"pie\",\n  hole = 0.55\n)\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  edad,\n  x = ~edad,\n  y = ~n,\n  type = \"bar\"\n)\n\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  formacion,\n  x = ~formacion,\n  y = ~n,\n  type = \"bar\"\n)\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  experiencia,\n  x = ~experiencia,\n  y = ~n,\n  type = \"bar\"\n)\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  ingreso,\n  x = ~ingreso,\n  y = ~n,\n  type = \"bar\"\n)\n\nWarning: Ignoring 1 observations\n\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  activo,\n  labels = ~activo,\n  values = ~n,\n  type = \"pie\",\n  hole = 0.6\n)"
+  },
+  {
+    "objectID": "dashboard/resumen.knit.html#indicadores-principales",
+    "href": "dashboard/resumen.knit.html#indicadores-principales",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "185\n\n\n\n24\n\n\n\nPregrado\n\n\n\n&lt; 2 millones"
+  },
+  {
+    "objectID": "dashboard/resumen.knit.html#perfil-de-los-participantes",
+    "href": "dashboard/resumen.knit.html#perfil-de-los-participantes",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  genero,\n  labels = ~genero,\n  values = ~n,\n  type = \"pie\",\n  hole = 0.55\n)\n\n\n\n\n\n\n\n\n\nplotly::plot_ly(\n  edad,\n  x = ~edad,\n  y = ~n,\n  type = \"bar\"\n)"
+  },
+  {
+    "objectID": "dashboard/resumen.knit.html#formación",
+    "href": "dashboard/resumen.knit.html#formación",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  formacion,\n  x = ~formacion,\n  y = ~n,\n  type = \"bar\"\n)"
+  },
+  {
+    "objectID": "dashboard/resumen.knit.html#experiencia",
+    "href": "dashboard/resumen.knit.html#experiencia",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  experiencia,\n  x = ~experiencia,\n  y = ~n,\n  type = \"bar\"\n)"
+  },
+  {
+    "objectID": "dashboard/resumen.knit.html#ingresos",
+    "href": "dashboard/resumen.knit.html#ingresos",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  ingreso,\n  x = ~ingreso,\n  y = ~n,\n  type = \"bar\"\n)\n\nWarning: Ignoring 1 observations"
+  },
+  {
+    "objectID": "dashboard/resumen.knit.html#trabaja-actualmente",
+    "href": "dashboard/resumen.knit.html#trabaja-actualmente",
+    "title": "Resumen Ejecutivo",
+    "section": "",
+    "text": "plotly::plot_ly(\n  activo,\n  labels = ~activo,\n  values = ~n,\n  type = \"pie\",\n  hole = 0.6\n)"
+  }
+]

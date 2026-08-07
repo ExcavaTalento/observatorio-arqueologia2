@@ -1,0 +1,156 @@
+---
+title: "Resumen Ejecutivo"
+page-layout: full
+---
+
+```{r}
+#| include: false
+
+source("../R/00_paquetes.R")
+
+kpis <- read_csv(
+  "../data/processed/kpis.csv",
+  show_col_types = FALSE
+)
+
+genero <- read_csv(
+  "../data/processed/frecuencia_genero.csv",
+  show_col_types = FALSE
+)
+
+edad <- read_csv(
+  "../data/processed/frecuencia_edad.csv",
+  show_col_types = FALSE
+)
+
+experiencia <- read_csv(
+  "../data/processed/frecuencia_experiencia.csv",
+  show_col_types = FALSE
+)
+
+formacion <- read_csv(
+  "../data/processed/frecuencia_formacion.csv",
+  show_col_types = FALSE
+)
+
+ingreso <- read_csv(
+  "../data/processed/frecuencia_ingreso.csv",
+  show_col_types = FALSE
+)
+
+activo <- read_csv(
+  "../data/processed/frecuencia_activo.csv",
+  show_col_types = FALSE
+)
+```
+
+# Resumen Ejecutivo
+
+## Indicadores principales
+
+::: {.kpi-grid}
+
+::: {.kpi-card}
+
+### Participantes
+
+**185**
+
+:::
+
+::: {.kpi-card}
+
+### Departamentos
+
+**24**
+
+:::
+
+::: {.kpi-card}
+
+### Formación predominante
+
+**Pregrado**
+
+:::
+
+::: {.kpi-card}
+
+### Ingreso predominante
+
+**< 2 millones**
+
+:::
+
+:::
+
+## Perfil de los participantes
+
+### Género
+
+```{r}
+plotly::plot_ly(
+  genero,
+  labels = ~genero,
+  values = ~n,
+  type = "pie",
+  hole = 0.55
+)
+```
+
+### Edad
+
+```{r}
+plotly::plot_ly(
+  edad,
+  x = ~edad,
+  y = ~n,
+  type = "bar"
+)
+```
+
+## Formación
+
+```{r}
+plotly::plot_ly(
+  formacion,
+  x = ~formacion,
+  y = ~n,
+  type = "bar"
+)
+```
+
+## Experiencia
+
+```{r}
+plotly::plot_ly(
+  experiencia,
+  x = ~experiencia,
+  y = ~n,
+  type = "bar"
+)
+```
+
+## Ingresos
+
+```{r}
+plotly::plot_ly(
+  ingreso,
+  x = ~ingreso,
+  y = ~n,
+  type = "bar"
+)
+```
+
+## Trabaja actualmente
+
+```{r}
+plotly::plot_ly(
+  activo,
+  labels = ~activo,
+  values = ~n,
+  type = "pie",
+  hole = 0.6
+)
+```
+

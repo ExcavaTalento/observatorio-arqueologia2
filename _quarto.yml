@@ -1,0 +1,35 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "ExcavaTalento"
+
+  favicon: img/favicon.png
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+
+      - href: dashboard/resumen.qmd
+        text: Resumen Ejecutivo
+
+      - href: dashboard/salarios.qmd
+        text: Salarios
+
+      - href: dashboard/competencias.qmd
+        text: Competencias
+
+      - href: dashboard/explorador.qmd
+        text: Explorador
+#pruebah
+format:
+  html:
+    theme:
+      - cosmo
+    css: styles.css
+    toc: true
+    resources:
+    - data/
+    
