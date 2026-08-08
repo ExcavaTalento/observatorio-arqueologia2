@@ -128,11 +128,16 @@ table(encuesta_limpia$salario, useNA = "ifany")
 #______________________________________________________________________________
 #departamento
 
+library(dplyr)
+library(tidyr)
+library(stringr)
+
 unique(encuesta_limpia$departamento)
 
-table(encuesta_limpia$departamento, useNA = "ifany")
-
-#cambio caracteres
+table(
+  encuesta_limpia$departamento,
+  useNA = "ifany"
+)
 
 encuesta_limpia <- encuesta_limpia |>
   mutate(
@@ -145,7 +150,8 @@ encuesta_limpia <- encuesta_limpia |>
     departamento = str_replace_all(
       departamento,
       "San Andrés, Providencia y Santa Catalina",
-      "San Andres, Providencia y Santa Catalina"),
+      "San Andres, Providencia y Santa Catalina"
+    ),
     departamento = str_replace_all(departamento, "Á", "A"),
     departamento = str_replace_all(departamento, "É", "E"),
     departamento = str_replace_all(departamento, "Í", "I"),
@@ -159,12 +165,80 @@ encuesta_limpia <- encuesta_limpia |>
     departamento = str_replace_all(departamento, "Ñ", "N"),
     departamento = str_replace_all(departamento, "ñ", "n")
   )
-grep("[áéíóúÁÉÍÓÚñÑ]", unique(encuesta_limpia$departamento), value = TRUE)
 
-unique(encuesta_limpia$departamento)
+grep(
+  "[áéíóúÁÉÍÓÚñÑ]",
+  unique(encuesta_limpia$departamento),
+  value = TRUE
+)
 
-table(encuesta_limpia$departamento, useNA = "ifany")
+encuesta_departamentos <- encuesta_limpia |>
+  mutate(
+    id_respuesta = row_number()
+  ) |>
+  separate_rows(
+    departamento,
+    sep = ","
+  ) |>
+  mutate(
+    departamento = str_trim(departamento)
+  )
 
+table(
+  encuesta_departamentos$departamento,
+  useNA = "ifany"
+)
+
+encuesta_departamentos <- encuesta_departamentos |>
+  mutate(
+    tipo_lugar = if_else(
+      departamento %in% c(
+        "Donde se presente la oportunidad",
+        "Mexico"
+      ),
+      "Otros",
+      "Departamento"
+    )
+  )
+
+frecuencia_departamentos <- encuesta_departamentos |>
+  filter(
+    tipo_lugar == "Departamento"
+  ) |>
+  count(
+    departamento,
+    name = "n"
+  ) |>
+  arrange(desc(n))
+
+otros_lugares <- encuesta_departamentos |>
+  filter(
+    tipo_lugar == "Otros"
+  )
+
+sort(
+  table(encuesta_departamentos$departamento),
+  decreasing = TRUE
+)
+
+frecuencia_departamentos
+
+otros_lugares
+
+write_csv(
+  encuesta_departamentos,
+  "data/processed/encuesta_departamentos.csv"
+)
+
+write_csv(
+  frecuencia_departamentos,
+  "data/processed/frecuencia_departamentos.csv"
+)
+
+write_csv(
+  otros_lugares,
+  "data/processed/otros_lugares.csv"
+)
 #______________________________________________________________________________
 #factor_ingreso
 

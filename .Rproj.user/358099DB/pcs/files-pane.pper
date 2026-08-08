@@ -1,6 +1,10 @@
 {
-    "path": "C:/Users/kelly/Downloads/ExcavaTalento/observatorio-arqueologia2/R",
+    "path": "C:/Users/kelly/Downloads/ExcavaTalento/observatorio-arqueologia2",
     "sortOrder": [
+        {
+            "columnIndex": 4,
+            "ascending": false
+        },
         {
             "columnIndex": 2,
             "ascending": true
