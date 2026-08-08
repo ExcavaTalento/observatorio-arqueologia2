@@ -682,3 +682,4 @@ table(
   encuesta_limpia$volveria_elegir,
   useNA = "ifany"
 )
+
